@@ -7,8 +7,8 @@ const signupEmailCtr = async (req, res) => {
         logger.info("Signup success", { email: req.body.email })
         res.json(result)
     } catch (error) {
-        logger.error("Sign up error", { error })
-        res.status(500).json({ error })
+        logger.error("Sign up error", { error: error.message })
+        res.status(500).json({ error: error.message })
     }
 }
 
@@ -17,8 +17,8 @@ const verifyOtpCrt = async (req, res) => {
         const token = await verifyOTP(req.body)
         res.json(token)
     } catch (error) {
-        logger.error("Verify otp error", { error })
-        res.status(500).json({ error })
+        logger.error("Verify otp error", { error: error.message })
+        res.status(500).json({ error: error.message })
     }
 }
 
@@ -27,8 +27,8 @@ const loginCrt = async (req, res) => {
         const tokens = await login(req.body);
         logger.info("Login success", { email: req.body.email })
     } catch (error) {
-        logger.error("Login error", { error })
-        res.status(500).json({ error })
+        logger.error("Login error", { error: error.message })
+        res.status(500).json({ error: error.message })
     }
 }
 
@@ -46,7 +46,7 @@ const refreshCtr = async (req, res) => {
         })
     } catch (error) {
         logger.error("Refresh error", { error, body: req.body })
-        res.status(500).json({ error })
+        res.status(500).json({ error: error.message })
     }
 }
 
@@ -56,8 +56,8 @@ const logoutCtr = async (req, res) => {
         logger.info("Logout success", { userId: req.user.userId })
         res.json("Logout success")
     } catch (error) {
-        logger.error("Logout error", { error })
-        res.status(500).json({ error })
+        logger.error("Logout error", { error: error.message })
+        res.status(500).json({ error: error.message })
     }
 }
 
